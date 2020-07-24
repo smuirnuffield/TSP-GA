@@ -23,7 +23,7 @@ class City:
     #getDistance() method, to be called through cityName.getDistance(otherCity)
     def getDistance(self, other):
         #use Pythagorean theorem to calculate distance
-        distance = numpy.sqrt((self.x-other.x)**2 + (self.y-other.y)**2)
+        distance = float(numpy.sqrt((self.x-other.x)**2 + (self.y-other.y)**2))
         return distance
     
     #use __repr__ method to format when City object is called with print()
@@ -66,7 +66,7 @@ def genCityList(noCities):
 
 #function to generate an individual/route
 def genRoute(cityList):
-    route = Route(random.sample(cityList, len(cityList)))
+    route = random.sample(cityList, len(cityList))
     return route
 
 #function to generate initial population
@@ -80,8 +80,8 @@ def genPop(popSize, cityList):
 def sortRoutes(population):
     fitnessScore = {}
     for x in range(0, len(population)):
-        #population[x].fitnessFunction()
-        fitnessScore[x] = population[x].getFitness()
+        Route(population[x]).fitnessFunction()
+        fitnessScore[x] = Route(population[x]).getFitness()
     #returns fitnessScore as list of tuples sorted in descending order by the 1st element
     return sorted(fitnessScore.items(), key = operator.itemgetter(1), reverse = True)
 
